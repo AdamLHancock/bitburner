@@ -1,0 +1,279 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Mathematics
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathptmx}
+\usepackage{mathtools}
+
+%% Graphics
+\usepackage{caption}
+\usepackage{tikz}
+
+%% Language and encoding
+\usepackage[utf8]{inputenc}
+
+%% Customized page geometry
+\usepackage{geometry}
+\geometry{
+  paper=a4paper,
+  margin=80pt,
+  top=30pt,
+  bottom=40pt,
+  includeheadfoot
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% IEEE uses Times Roman font, so we'll default to Times.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% These three commands make up the entire times.sty package.
+%% \renewcommand{\sfdefault}{phv}
+\renewcommand{\rmdefault}{ptm}
+\renewcommand{\ttdefault}{pcr}
+%% Enable Times/Palatino main text font
+\normalfont\selectfont
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Customized numbering for corollary, lemma, theorem, etc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Theorem}[section]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Miscellaneous.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{datetime2}
+\usepackage{enumerate}
+\usepackage[bottom]{footmisc}
+\usepackage{xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Mathematics alphabet.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\PP}{\mathbf{P}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Typesetting algorithms and pseudocode.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[section]{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\algnotext{EndFor}
+\algnotext{EndFunction}
+\algnotext{EndIf}
+\algnotext{EndProcedure}
+\algnotext{EndWhile}
+\algrenewcommand\algorithmicrequire{\textbf{Input}}
+\algrenewcommand\algorithmicensure{\textbf{Output}}
+\renewcommand{\thealgorithm}{\arabic{section}.\arabic{algorithm}}
+%%
+\renewcommand{\And}{\textbf{and}\xspace}
+\newcommand{\code}[1]{{\sf {#1}}}  %% small code snippet
+\newcommand{\Continue}{\textbf{continue}\xspace}
+\newcommand{\False}{\code{false}}
+\newcommand{\Index}{\code{index}}
+\newcommand{\Jump}{\code{jump}}
+\newcommand{\Prime}{\code{prime}}
+\newcommand{\Reduce}{\code{reduce}}
+\newcommand{\True}{\code{true}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Cross-reference various objects.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Algorithm}[1]{Algorithm~\ref{#1}}
+\newcommand{\AlgorithmB}[2]{Algorithms~\ref{#1} and~\ref{#2}}
+\newcommand{\Equation}[1]{Equation~\eqref{#1}}
+\newcommand{\Matrix}[1]{matrix~\eqref{#1}}
+\newcommand{\Relation}[1]{relation~\eqref{#1}}
+\newcommand{\Section}[1]{section~\ref{#1}}
+\newcommand{\Submatrix}[1]{submatrix~\eqref{#1}}
+\newcommand{\Theorem}[1]{Theorem~\ref{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Set theory
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% The cardinality of a set.  The cardinality is the number of
+%% elements in a set.
+%%
+%% #1 := A set.
+\newcommand{\Cardinality}[1]{%%
+  \left| {#1} \right|%%
+}
+%%
+\newcommand{\Set}[1]{\left\{#1\right\}}
+%%
+%% A set of the first n primes.
+%%
+%% #1 := The variable.
+%% #2 := The maximum index.
+\newcommand{\SetFirstPrimes}[2]{%%
+  \Set{%%
+    \TupleD{{#1}_1}{{#1}_2}{\dots}{{#1}_{#2}}%%
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Sequences.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% A finite array of indexed values.
+%%
+%% #1 := The variable.
+%% #2 := The largest index.
+\newcommand{\Array}[2]{%%
+  \left[%%
+    \TupleD{{#1}_1}{{#1}_2}{\dots}{{#1}_{#2}}%%
+  \right]%%
+}
+%%
+%% An array of 2 values.
+%%
+%% #1 := The first value.
+%% #2 := The second value.
+\newcommand{\ArrayB}[2]{%%
+  \left[%%
+    \TupleB{#1}{#2}%%
+  \right]%%
+}
+%%
+%% An array of indexed values, where the values are explicitly given.
+%%
+%% #1 := The first value.
+%% #2 := The second value.
+%% #3 := The final value.
+\newcommand{\ArrayABZ}[3]{%%
+  \left[%%
+    \TupleD{#1}{#2}{\dots}{#3}%%
+  \right]
+}
+%%
+%% A pair of numbers.
+%%
+%% #1 := The first element.
+%% #2 := The second element.
+\newcommand{\Pair}[2]{%%
+  \left( \TupleB{#1}{#2} \right)%%
+}
+%%
+%% A finite sequence of indexed values.
+%%
+%% #1 := The variable.
+%% #2 := The maximum index.
+\newcommand{\Seq}[2]{%%
+  \TupleD{{#1}_1}{{#1}_2}{\dots}{{#1}_{#2}}%%
+}
+%%
+%% A finite sequence, where the values are explicitly given.
+%%
+%% #1 := The first value.
+%% #2 := The second value.
+%% #3 := The final value.
+\newcommand{\SeqABZ}[3]{%%
+  \TupleD{#1}{#2}{\dots}{#3}%%
+}
+%%
+%% A sequence numbers ordered by <.
+%%
+%% #1 := The variable.
+%% #2 := The index.
+\newcommand{\Seqlt}[2]{%%
+  {#1}_1 < {#1}_2 < \cdots < {#1}_{#2}%%
+}
+%%
+%% A finite sequence of indexed values.  The index starts from zero.
+%%
+%% #1 := The variable.
+%% #2 := The number of indexed variables.  Subtract 1 from this number
+%%     to get the value of the largest index.
+\newcommand{\Seqz}[2]{%%
+  \TupleD{{#1}_0}{{#1}_1}{\dots}{{#1}_{{#2}-1}}%%
+}
+%%
+%% Tuples of numbers.
+\newcommand{\TupleB}[2]{%%
+  {#1},\, {#2}
+}
+\newcommand{\TupleC}[3]{%%
+  \TupleB{#1}{#2},\, {#3}
+}
+\newcommand{\TupleD}[4]{%%
+  \TupleC{#1}{#2}{#3},\, {#4}
+}
+\newcommand{\TupleE}[5]{%%
+  \TupleD{#1}{#2}{#3}{#4},\, {#5}%%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Miscellaneous macros.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\BigParen}[1]{%%
+  \big({#1}\big)
+}
+%%
+%% The congruence relation a equiv b (mod c).
+\newcommand{\Equivmod}[3]{%%
+  {#1} \; \equiv \; {#2} \; (\text{mod}\xspace\; {#3})%%
+}
+%%
+%% The maximum of 2 values.
+%%
+%% #1 := The first value.
+%% #2 := The second value.
+\newcommand{\Max}[2]{%%
+  \text{max}\Set{\TupleB{#1}{#2}}%%
+}
+%%
+%% A todo note.
+\newcommand{\Todo}[1]{%%
+  {\color{red} {#1}}%%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Custom environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Pack together the items of an enumeration.  Remove extraneous
+%% vertical spacing between items.  Use lower-case alphabetic
+%% characters for enumeration.
+\newenvironment{packedenum}{
+\setlength{\parskip}{-5pt}
+\begin{enumerate}[(a)]
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{2pt}
+  \setlength{\parsep}{0pt}
+}{
+  \end{enumerate}
+  \vspace{-6pt}
+}
+%%
+%%
+%% Enumeration via numerals.
+\newenvironment{packedenumeral}{
+\begin{enumerate}[(1)]
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{2pt}
+  \setlength{\parsep}{0pt}
+}{\end{enumerate}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Metadata in PDF document.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{hyperref}
+\hypersetup{
+  pdftitle={Coding Contracts},%%
+  pdfauthor={Duck McSouls},%%
+  pdfsubject={mathematics, computing},%%
+  colorlinks=true,%%
+  linkcolor=black,%%
+  citecolor=black,%%
+  urlcolor=black
+}

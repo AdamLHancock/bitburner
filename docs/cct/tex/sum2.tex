@@ -1,0 +1,101 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Total ways to sum II}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Problem}
+
+Let $n > 0$ is an integer and consider an array $A$ of positive
+integers.  Elements in $A$ are unique.  Determine the number of
+different ways to represent $n$ as a sum of integers from $A$.  Each
+integer in $A$ can be used zero or more times.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Solution}
+
+This is a special case of the problem
+in \Section{sec:sum:total_ways_to_sum}, known as the coin changing
+problem.  Suppose we have a target amount of money $n$.  We have $m$
+distinct coins.  The denominations are given by the set
+$A = \Set{\Seq{a}{m}}$, where $a_i < a_j$ whenever $i < j$.  How many
+ways are there to combine one or more coins such that the total amount
+is $n$?  We can use a coin zero, one, or more times.\footnote{
+  Refer to this page for more detail:
+  \url{https://algorithmist.com/wiki/Coin_change}
+}
+The problem is easily solved by the method of generating
+function.\footnote{
+  \url{https://en.wikipedia.org/wiki/Generating_function}
+}
+The generating function for the coin changing problem is
+\[
+C(z)
+=
+\prod_{i=1}^{m}
+\frac{
+  1
+}{
+  1 - z^{a_i}
+}.
+\]
+The number of ways to combine coins to reach the target value $n$ is
+the coefficient of $z^n$ in the generating function $C(z)$.  How would
+we determine the coefficient of $z^n$?  Define $k$ as the least common
+multiple of $\Seq{a}{m}$ and define the number
+\[
+M
+=
+(k - a_1)
++
+(k - a_2)
++
+\cdots
++
+(k - a_m).
+\]
+Then the coefficient of $z^n$ is the given by the summation\footnote{
+  Refer to the following paper for the derivation:
+  \url{https://arxiv.org/abs/1406.5213}
+}
+\[
+\sum_{\substack{0 \; \leq \; i \; \leq \; M\\[2pt] \Equivmod{i}{n}{k}}}
+a_i
+\binom{
+  \frac{n-i}{k} + m - 1
+}{
+  m - 1
+}.
+\]
+
+Another way to calculate the coefficient of $z^n$ is to consider each
+denomination in turn.  Let $c_i$ be the number of ways to sum to $i$
+by using the denominations in $A$.  Define the recurrence relation
+%%
+\begin{equation}
+\label{eqn:sum2:recurrence_relation}
+c_i
+\coloneqq
+c_i + c_{i-a}
+\end{equation}
+%%
+where $a \in A$ and $a \leq i \leq n$.  The initial conditions are
+that $c_0 = 1$ and $c_i = 0$ for all $i > 0$.  As we work through each
+denomination in turn, the recurrence
+\Relation{eqn:sum2:recurrence_relation} gradually propagates values up
+to $c_n$.  Once we have worked through all denomination values, the
+final value of $c_n$ is the coefficient of $z^n$.  The above procedure
+is summarized in \Algorithm{alg:sum2:recurrence_relation}.  Notice the
+similarity between
+\AlgorithmB{alg:sum:recurrence_relation}{alg:sum2:recurrence_relation}.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/sum2.tex}
+\caption{%%
+  The number of ways to change money.
+}
+\label{alg:sum2:recurrence_relation}
+\end{algorithm}

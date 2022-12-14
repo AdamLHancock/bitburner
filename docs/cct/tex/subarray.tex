@@ -1,0 +1,39 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Subarray with maximum sum}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Problem}
+
+Consider an array of integers.  Determine the largest sum of a
+non-empty, contiguous subarray.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Solution}
+
+This is the maximum subarray problem, where empty subarrays are not
+allowed.\footnote{
+  Refer to Wikipedia for more details:
+  \url{https://en.wikipedia.org/wiki/Maximum_subarray_problem}
+}
+The problem is easily solved by Kadane's algorithm, as shown in
+\Algorithm{alg:subarray:kadane}.  Given an array
+$A = \Array{a}{n}$ of $n \geq 1$ elements, Kadane's algorithm uses $2$
+variables $g$ and $c$.  The variable $g$ keeps track of the greatest
+sum of any contiguous subarray so far, whereas $c$ keeps track of the
+sum of all $a_i$ up to and including index $i$.  Initially, $g$
+represents a number lower than any $a_i$ and we set $c \gets 0$.  Step
+through each array element $a_i$ in order of index and update
+$c \gets \Max{a_i}{c + a_i}$ and $g \gets \Max{g}{c}$.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/subarray/kadane.tex}
+\caption{%%
+  Kadane's algorithm.
+}
+\label{alg:subarray:kadane}
+\end{algorithm}
